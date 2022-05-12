@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: dockersamplenginx 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dockersamplenginx
+  template:
+    metadata:
+      labels:
+        app: dockersamplenginx 
+    spec:
+      containers:
+        - name: dockersamplenginx 
+          image: k8stestforcarrie.azurecr.io/dockersamplenginx
+          ports:
+          - containerPort: 80
