@@ -1,29 +1,32 @@
-apiVersion: apps/v1
+apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: dockersamplenginx 
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
-  replicas: 1 # tells deployment to run 2 pods matching the template
+      app: dockersamplenginx
   template:
     metadata:
       labels:
-        app: nginx
+        app: dockersamplenginx 
     spec:
       containers:
-      - name: nginx
-        image: k8stestforcarrie.azurecr.io/dockersamplenginx
-        ports:
-        - containerPort: 80
+        - name: dockersamplenginx 
+          image: k8stestforcarrie.azurecr.io/dockersamplenginx
+          ports:
+          - containerPort: 80
+          
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-deployment
+    name: dockersamplenginx
 spec:
-  ports:
-  - port: 80
-  selector:
-    app: nginx-deployment
+    type: LoadBalancer
+    ports:
+    - port: 80 
+    selector:
+        app: dockersamplenginx
